@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Single Cat</title>
+</head>
+
+<body>
+    <%- include('./includes/nav') %>
+
+        <% if (cat) { %>
+            <div>
+                <h1>
+                    <%= cat.name %>
+                </h1>
+                <p>Age: <%= cat.age %>
+                </p>
+                <p>Species: <%= cat.species %>
+                </p>
+                <img src="<%= cat.image %>" alt="<%= cat.name %>">
+            </div>
+            <% } else { %>
+                <h1>Oops! There are no cats, sorry.</h1>
+                <% } %>
+</body>
+
+</html>

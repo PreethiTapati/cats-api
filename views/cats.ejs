@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <title>cats list</title>
+</head>
+
+<body>
+    <%- include('./includes/nav') %>
+
+        <% if(cats.length> 0 ){ %>
+            <h1>cats</h1>
+            <% cats.forEach(cat=> { %>
+                <div class="cat-container">
+                    <img src="<%= cat.image  %>" alt="<%= cat.name  %>">
+                    <h1> <%= cat.name %>
+                    </h1>
+                    <p>Age: <%= cat.age %>
+                    </p>
+                    <p>species: <%= cat.species %>
+                    </p>
+                </div>
+                <% }); } else{ %>
+                    <h1>there are no cats found, sorry </h1>
+                    <% } %>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+<h1> Cats </h1>
+<nav id="cats_nav">
+    <ul>
+        <li class="current-menu-item"><a href="../">Home</a></li>
+        <% cats.forEach(cat=> { %>
+            <li><a href="/api/cats/<%= cat.id %>">
+                    <%= cat.name %> (<%= cat.species %>)
+                </a></li>
+            <% }); %>
+    </ul>
+</nav>
+<hr class="nav-line" />
