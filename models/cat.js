@@ -44,29 +44,31 @@ const cats = [
         image: 'https://media.gettyimages.com/id/988536796/fr/photo/luna-is-in-the-house.jpg?s=612x612&w=0&k=20&c=XK7F9SqI-uoL9ZEA6S8E_PzPdfCPARx1h3SHoTkGc_8='
     }
 ];
-
 class Cat {
-    constructor(name, age, species, image) {
-        this.name = name
+    constructor(name, age, image, species) {
+        this.id = newId();
+        this.name = name;
         this.age = age;
         this.species = species;
         this.image = image;
-        this.id = newId();
     }
 
-    static getCats = () => {
+    static getCats() {
         return cats;
-    };
+    }
 
-    static getCatById = (id) => {
+    static getCat(id) {
         return cats.find((cat) => cat.id === id);
-    };
+    }
+    static getCatsBySpecies(species) {
+        return cats.filter((cat) => cat.species === species);
+    }
 
-    addCat = () => {
+    addCat() {
         cats.push(this);
-    };
+    }
 
-    static updateCat = (id, newCat) => {
+    static updateCat(id, newCat) {
         const index = cats.findIndex((cat) => cat.id === id);
         if (index === -1) {
             return false;
@@ -74,8 +76,9 @@ class Cat {
             cats[index] = { id, ...newCat };
             return true;
         }
-    };
-    static deleteCat = (id) => {
+    }
+
+    static deleteCat(id) {
         const index = cats.findIndex((cat) => cat.id === id);
         if (index === -1) {
             return false;
@@ -83,7 +86,7 @@ class Cat {
             cats.splice(index, 1);
             return true;
         }
-    };
+    }
 }
 
 export default Cat;

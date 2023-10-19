@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Cats of Species: <%= species %>
+    </title>
+</head>
+
+<body>
+    <h1 class="title">Species of Cats: <%= species %>
+    </h1>
+    <%- include('./includes/nav.ejs') %>
+        <ul class="container">
+            <% cats.forEach(cat=> { %>
+                <div class="cat-container">
+                    <p class="species">Name: <%= cat.name %>
+                    </p>
+                    <p class="age">Age: <%= cat.age %>
+                    </p>
+                    <p class="species">Species: <%= cat.species %>
+                    </p>
+                    <img src="<%= cat.image %>" alt="<%= cat.name %>" />
+                </div>
+                <% }); %>
+        </ul>
+</body>
+
+</html>

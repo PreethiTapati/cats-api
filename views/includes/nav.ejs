@@ -1,12 +1,13 @@
-<h1> Cats </h1>
-<nav id="cats_nav">
+
+<nav >
     <ul>
-        <li class="current-menu-item"><a href="../">Home</a></li>
-        <% cats.forEach(cat=> { %>
-            <li><a href="/api/cats/<%= cat.id %>">
-                    <%= cat.name %> (<%= cat.species %>)
-                </a></li>
-            <% }); %>
+        <ul>
+            <li><a href="/cats">All Cats</a></li>
+            <li>
+                <a href="/cats/species/Domestic Shorthair">Domestic Shorthair</a>
+            </li>
+            <li><a href="/cats/species/Maine Coon">Maine Coon </a> </li>
+            <li><a href="/cats/species/Siamese">Siamese </a> </li>
+        </ul>
     </ul>
 </nav>
-<hr class="nav-line" />

@@ -1,53 +1,46 @@
 import Cat from '../models/cat.js';
 
-const catControllers = {
+const catController = {
     getCats: (req, res) => {
         const cats = Cat.getCats();
-        res.render('cats', { cats });
+
+        res.render('cats', { cats: cats });
     },
-    getCatById: (req, res) => {
-        const { id } = req.params;
-        const cat = Cat.getCatById(id);
-        if (cat) {
-            res.render('cat', { cat });
-        } else {
-            res.status(404).render({ error: 'Cat not found' });
-        }
-    },
-    getCatByspecies: (req, res) => {
+
+    getCatsBySpecies: (req, res) => {
         const { species } = req.params;
-        const cats = Cat.getCatByspecies(species);
-        res.render('cats', { cats });
+
+        const filteredCats = Cat.getCatsBySpecies(species);
+
+        res.render('spesies', { cats: filteredCats, species: species });
     },
-    addCat: (req, res) => {
-        const { name, age, species, img } = req.body;
-        const newCat = new Cat(name, age, species, img);
+
+    postCat: (req, res) => {
+        const { name, age, image, species } = req.body;
+        const newCat = new Cat(name, age, image, species);
         newCat.addCat();
-        res.render('cat', { cat: newCat });
+        res.json(newCat);
     },
     updateCat: (req, res) => {
         const { id } = req.params;
-        const existingCat = Cat.getCat(id);
-        if (!existingCat) {
-            res.status(404).render({ error: 'Cat not found' });
+        const newCatData = req.body;
+        const cat = Cat.updateCat(id, newCatData);
+        if (cat) {
+            res.json({ message: 'Cat updated successfully', cat });
         } else {
-            const { name, age, species, img } = req.body;
-            const updatedCat = { name, age, species, img, id };
-            if (Cat.updateCat(id, updatedCat)) {
-                res.render('cat', { cat: updatedCat });
-            } else {
-                res.status(500).render({ error: 'Failed to update cat' });
-            }
+            res.status(404).json({ message: 'Cat not found' });
         }
     },
+
     deleteCat: (req, res) => {
         const { id } = req.params;
-        if (Cat.deleteCat(id)) {
-            res.json({ message: 'Cat deleted' });
+        const deleted = Cat.deleteCat(id);
+        if (deleted) {
+            res.json({ message: 'Cat deleted successfully' });
         } else {
-            res.status(404).render({ error: 'Cat not found' });
+            res.status(404).json({ message: 'Cat not found' });
         }
     }
 };
 
-export default catControllers;
+export default catController;

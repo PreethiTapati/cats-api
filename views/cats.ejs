@@ -1,32 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-
-    <title>cats list</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Cats</title>
 </head>
 
 <body>
-    <%- include('./includes/nav') %>
+    <h1 class="title">Cats</h1>
+    <%- include('./includes/nav.ejs') %>
+    <div>
+        <form action="/add" method="POST" class="cat-form">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="input-field" />
+            <label for="age">Age</label>
+            <input type="number" name="age" id="age" class="input-field" />
+            <label for="species">Species</label>
+            <input type="text" name="species" id="species" class="input-field" />
+            <label for="img">Image</label>
+            <input type="text" name="img" id="image" class="input-field" />
+            <button type="submit" class="submit-button">Add Cat</button>
+        </form>
+    </div>
 
-        <% if(cats.length> 0 ){ %>
-            <h1>cats</h1>
-            <% cats.forEach(cat=> { %>
-                <div class="cat-container">
-                    <img src="<%= cat.image  %>" alt="<%= cat.name  %>">
-                    <h1> <%= cat.name %>
-                    </h1>
-                    <p>Age: <%= cat.age %>
-                    </p>
-                    <p>species: <%= cat.species %>
-                    </p>
-                </div>
-                <% }); } else{ %>
-                    <h1>there are no cats found, sorry </h1>
-                    <% } %>
+        <div class="container">
+            <% if (cats.length> 0) { %> <% cats.forEach((cat)=> { %>
+                    <div class="cat-container">
+                        <h1 class="cat-title">
+                            <%= cat.name %>
+                        </h1>
+                        <p class="age">Age: <%= cat.age %>
+                        </p>
+                        <p class="species">Species: <%= cat.species %>
+                        </p>
+                        <img src="<%= cat.image %>" alt="<%= cat.name %>" />
+                    </div>
+                    <% }) %>
+                        <% } else { %>
+                            <p>No cats Found.</p>
+                            <% } %>
+        </div>
 </body>
 
 </html>
